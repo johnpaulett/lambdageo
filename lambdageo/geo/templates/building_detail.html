@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ building.name }}</h2>
+
+<div id="map-container" style="width:100%; height:500px"></div>
+
+
+<h3>Inside Building</h3>
+<ul>
+    {% for measurement in inside_measurements %}
+        <li>
+            {{ measurement }}
+            {{ measurement.device.user_agent }} 
+        </li>
+    {% empty %}
+        <li>None inside building</li>
+    {% endfor %}
+</ul>
+
+
+<h3>Closest Measurements</h3>
+<ol>
+    {% for measurement in measurements %}
+        <li>
+            {{ measurement }}
+            {{ measurement.device.user_agent }} 
+        </li>
+    {% endfor %}
+</ol>
+
+
+<script type="text/javascript">
+$(document).ready(function() {
+    displayMap(
+        {{ building.poly.geojson|safe }},
+        [
+            {% for measurement in measurements %}
+                [
+                    {{ measurement.location.geojson|safe }}, 
+                    "{{ measurement.device.user_agent }}", 
+                ],
+            {% endfor %}
+        ]
+    );
+
+});
+</script>
+{% endblock %}

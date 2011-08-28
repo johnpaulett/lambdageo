@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2>Buildings</h2>
+<ul>
+    {% for building in buildings %}
+        <li>
+            <a href="{% url building building.id %}">{{ building.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+
+<h2>Devices (# measurements)</h2>
+<ol>
+    {% for device in devices %}
+        <li>
+            {{ device.user_agent }} 
+            <b>({{ device.num_measurements }})</b>
+        </li>
+    {% endfor %}
+</ol>
+
+{% endblock %}
