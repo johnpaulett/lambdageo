@@ -6,10 +6,6 @@ class Building(models.Model):
     poly = models.PolygonField()
     objects = models.GeoManager()
 
-    @models.permalink
-    def get_absolute_url(self):
-        return ('geo.views.building', [str(self.id)])
-
     def __unicode__(self):
         return self.name
 
