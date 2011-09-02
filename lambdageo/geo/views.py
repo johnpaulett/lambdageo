@@ -5,9 +5,6 @@ from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 from geo.models import Building, Device, Measurement
 
-import json
-
-
 @csrf_exempt
 def upload(request):
     # only accept POSTS
